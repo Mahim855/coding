@@ -1,0 +1,20 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import control as ctrl
+
+# Define the transfer function G(s)H(s)
+numerator = [1, 2, 1]  # (s + 2)^2 -> s^2 + 4s + 4
+denominator = [1, 2, 2]  # (s + 1 - j)(s + 1 + j) -> s^2 + 2s + 2
+
+# Create the open-loop transfer function G(s)H(s)
+system = ctrl.TransferFunction(numerator, denominator)
+
+# Generate and plot the root locus
+plt.figure(figsize=(8, 6))
+ctrl.root_locus(system, grid=True)
+plt.title("Root Locus for Complex-Conjugate Poles and a Double Zero")
+plt.xlabel("Re(s)")
+plt.ylabel("Im(s)")
+plt.axvline(x=-1, color='r', linestyle='--', label="Double Zero at s = -2")
+plt.legend()
+plt.show()
